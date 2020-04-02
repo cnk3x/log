@@ -13,8 +13,7 @@ const (
 
 type L interface {
 	Output(depth int, level Level, format string, args ...interface{}) error
-	SetLevel(level string)
-	SetName(name string)
+	Config(level Level, name string, report, showTime bool)
 }
 
 type Level int
@@ -34,11 +33,11 @@ func (l Level) String() string {
 
 func ParseLevel(l string) Level {
 	switch strings.ToUpper(l) {
-	case "DEBUG", "D", "0", "2":
+	case "DEBUG", "DEBU", "D", "0", "2":
 		return DebugLevel
 	case "INFO", "I", "4":
 		return InfoLevel
-	case "ERROR", "ERR", "E", "8":
+	case "ERROR", "ERRO", "ERR", "E", "8":
 		return ErrorLevel
 	default:
 		return InfoLevel
